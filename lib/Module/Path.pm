@@ -101,6 +101,12 @@ in L<"perlfunc"/"require">.
 
 =head1 SEE ALSO
 
+There are a number of other modules on CPAN which provide the
+same or similar functionality. But many of them provide a lot of
+other things, and/or they have a number of non-core dependencies.
+Or they're not as robust. The following is a list of the ones
+I'm currently aware of.
+
 L<Module::Filename>, L<Module::Overview>, L<Module::Data>, L<Module::Finder>,
 L<Module::Info>, L<Module::InstalledVersion>, L<Module::Locate>.
 
