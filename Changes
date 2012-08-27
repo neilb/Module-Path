@@ -1,5 +1,9 @@
 Revision history for perl module Module::Path
 
+0.03 2012-08-27
+    - Directory separator should be / and not \ on MSWin32.
+      Thanks to kmx for helping me identify the issue.
+
 0.02 2012-08-26
     - bugfix in initialisation of separator (Tom Molesworth)
     - Added github repo to metadata and documentation

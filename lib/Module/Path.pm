@@ -11,12 +11,12 @@ our @EXPORT_OK = qw(module_path);
 my $SEPARATOR;
 
 BEGIN {
-    if ($^O =~ /^(MSWin|dos|os2)/i) {
+    if ($^O =~ /^(dos|os2)/i) {
         $SEPARATOR = '\\';
     } elsif ($^O =~ /^MacOS/i) {
         $SEPARATOR = ':';
     } else {
-        $SEPARATOR  = '/';
+        $SEPARATOR = '/';
     }
 }
 
