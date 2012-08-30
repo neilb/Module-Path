@@ -1,5 +1,8 @@
 Revision history for perl module Module::Path
 
+0.04 2012-08-30
+    - github repo was specified wrongly in dist.int (Olivier Mengué)
+
 0.03 2012-08-27
     - Directory separator should be / and not \ on MSWin32.
       Thanks to kmx for helping me identify the issue.
