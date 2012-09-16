@@ -1,0 +1,47 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Module::Path qw(module_path);
+
+die "Usage: $0 <module>\n" unless @ARGV == 1;
+my $module = shift @ARGV;
+my $path   = module_path($module);
+if (!defined($path)) {
+    die "$module not found\n";
+}
+print $path, "\n";
+exit 0;
+
+=head1 NAME
+
+mpath - display the full path to a perl module (installed locally)
+
+=head1 SYNOPSIS
+
+  % mpath Module::Path
+  /usr/local/lib/perl5/site_perl/5.16.0/Module/Path.pm
+
+=head1 DESCRIPTION
+
+mpath displays the full path to a perl module on the local system.
+It uses the C<module_path()> function from L<Module::Path> to get the path.
+
+At the moment the script only lets you list one argument; anything else
+and it will die with a usage message.
+
+If the module wasn't found, C<mpath> will die with the following message:
+
+  % mpath Foo::Bar
+  Foo::Bar not found
+
+=head1 AUTHOR
+
+Neil Bowers E<lt>neilb@cpan.orgE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Neil Bowers E<lt>neilb@cpan.orgE<gt>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+

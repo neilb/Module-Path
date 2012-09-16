@@ -1,5 +1,8 @@
 Revision history for perl module Module::Path
 
+0.05 2012-09-16
+    - Added lightweight mpath script, which just calls module_path()
+
 0.04 2012-08-30
     - github repo was specified wrongly in dist.int (Olivier Mengué)
 
