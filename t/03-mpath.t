@@ -23,7 +23,7 @@ chomp($path = `"$^X" $MPATH strict 2>&1`);
 
 # This test does "use strict", so %INC should include the path where
 # strict.pm was found, and module_path should find the same
-ok(defined($path) && $path eq $INC{'strict.pm'},
+ok($? == 0 && defined($path) && $path eq $INC{'strict.pm'},
    "check 'mpath strict' matches \%INC") || do {
     warn "\n",
          "    \%INC        : $INC{'strict.pm'}\n",
