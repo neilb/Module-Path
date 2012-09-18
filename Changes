@@ -1,5 +1,9 @@
 Revision history for perl module Module::Path
 
+0.06 2012-09-18
+    - should check $? after running backticks in t/03-mpath.t,
+      to ensure process exited cleanly.
+
 0.05 2012-09-18
     - Added lightweight mpath script, which just calls module_path()
       Made path to script portable, thanks to help from kentnl and leont.
