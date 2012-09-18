@@ -34,6 +34,10 @@ If the module wasn't found, C<mpath> will die with the following message:
   % mpath Foo::Bar
   Foo::Bar not found
 
+=head1 SEE ALSO
+
+L<Module::Path>
+
 =head1 AUTHOR
 
 Neil Bowers E<lt>neilb@cpan.orgE<gt>
