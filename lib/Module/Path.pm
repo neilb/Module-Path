@@ -94,6 +94,11 @@ I wrote this module because I couldn't find an alternative
 which dealt with the points listed above, and didn't pull in
 what seemed like too many dependencies to me.
 
+The distribution for C<Module::Path> includes the C<mpath>
+script, which lets you get the path for a module from the command-line:
+
+ % mpath Module::Path
+
 =head1 BUGS
 
 Obviously this only works where the module you're after has its own C<.pm>
