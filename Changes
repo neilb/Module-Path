@@ -1,8 +1,10 @@
 Revision history for perl module Module::Path
 
-0.04_2 2012-09-17
+0.05 2012-09-18
     - Added lightweight mpath script, which just calls module_path()
       Made path to script portable, thanks to help from kentnl and leont.
+      Ugh, test could be run with a different perl than mpath.
+      More help, from leont, ether and haarg.
 
 0.04 2012-08-30
     - github repo was specified wrongly in dist.int (Olivier Mengué)
