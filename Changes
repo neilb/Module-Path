@@ -1,5 +1,10 @@
 Revision history for perl module Module::Path
 
+0.07 2012-09-24
+    - Made the repository path a link in the pod (Olivier Mengué)
+    - Updated pod to refer to review of this and similar modules.
+      Nudged by Olivier Mengué.
+
 0.06 2012-09-18
     - should check $? after running backticks in t/03-mpath.t,
       to ensure process exited cleanly.

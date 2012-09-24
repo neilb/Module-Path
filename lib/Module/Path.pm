@@ -99,6 +99,7 @@ script, which lets you get the path for a module from the command-line:
 
  % mpath Module::Path
 
+
 =head1 BUGS
 
 Obviously this only works where the module you're after has its own C<.pm>
@@ -108,56 +109,44 @@ This also won't find any modules that are being loaded in some special
 way, for example using a code reference in C<@INC>, as described
 in L<"perlfunc"/"require">.
 
+
 =head1 SEE ALSO
 
 There are a number of other modules on CPAN which provide the
-same or similar functionality. But many of them provide a lot of
-other things, and/or they have a number of non-core dependencies.
-Or they're not as robust. The following is a list of the ones
-I'm currently aware of.
+same or similar functionality:
+L<App::whichpm>,
+L<Class::Inspector>,
+L<Module::Data>,
+L<Module::Filename>,
+L<Module::Finder>,
+L<Module::Info>,
+L<Module::Locate>,
+L<Module::Mapper>,
+L<Module::Metadata>,
+L<Module::Runtime>,
+L<Module::Util>,
+and L<Path::ScanINC>.
 
-=over 2
+I've written a review of all such modules that I'm aware of:
 
-=item L<Module::Filename>
+=over 4
 
-Provides an OO interface, with a single method C<filename()>,
-which provides the same mapping as Module::Path. Uses L<Path::Class>
-to ensure portable handling of directory paths.
-
-=item L<Module::Metadata>
-
-Class which provides various ways to find a module,
-and can then report the version and other things beyond the path.
-
-=item L<Module::Info>
-
-Another class which can give you a lot of information about a module,
-without having to load it.
-
-=item L<Module::Locate>
-
-A collection of utility functions for getting information about
-a module's path, and source, amongst other things.
-
-=item L<Module::Data>
-
-A class which can provide information about a module,
-similar to L<Module::Info>, but not as much information.
-
-=item L<Module::Finder>
-
-A class for finding and querying modules. This is very slow,
-so if you're just after the path, don't use this module.
-
-=item L<Module::Util>
-
-A collection of functions for handling module names and paths.
-
-=item L<App::whichpm>, L<App::Module::Locate>, L<App::moduleswhere>
-
-Apps for accessing module information, which include the path.
+L<http://neilb.org/reviews/module-path.html>
 
 =back
+
+Module::Path was written to be fast, portable, and have a low number of
+core-only runtime dependencies. It you only want to look up the path to
+a module, it's a good choice.
+
+If you want more information, such as the module's version, what functions
+are provided, etc, then start by looking at L<Module::Info>,
+L<Module::Metadata>, and L<Class::Inspector>.
+
+The following scripts can also give you the path:
+L<perldoc>,
+L<whichpm|https://www.metacpan.org/module/whichpm>.
+
 
 =head1 REPOSITORY
 

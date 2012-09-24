@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More 0.88 tests => 2;
 use FindBin;
-use File::Spec;
+use File::Spec::Functions;
 
-my $MPATH = File::Spec->catfile( $FindBin::Bin, File::Spec->updir(), qw(bin mpath) );
+my $MPATH = catfile( $FindBin::Bin, updir(), qw(bin mpath) );
 my $path;
 
 #
