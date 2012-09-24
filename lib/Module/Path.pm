@@ -161,7 +161,7 @@ Apps for accessing module information, which include the path.
 
 =head1 REPOSITORY
 
-https://github.com/neilbowers/Module-Path
+L<https://github.com/neilbowers/Module-Path>
 
 =head1 AUTHOR
 
