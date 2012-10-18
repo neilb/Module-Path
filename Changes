@@ -1,5 +1,11 @@
 Revision history for perl module Module::Path
 
+0.08 2012-10-18
+    - t/03-mpath.t: now used Devel::FindPerl to get path to perl,
+      instead of $^X. Thanks to LeonT.
+    - should be quoting the path to the mpath binary in t/03-mpath.t
+      Thanks to Graham Knop (haarg).
+
 0.07 2012-09-24
     - Made the repository path a link in the pod (Olivier Mengué)
     - Updated pod to refer to review of this and similar modules.
