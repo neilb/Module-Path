@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More 0.88 tests => 2;
+use Test::More 0.88 tests => 3;
 
 use Module::Path 'module_path';
 
@@ -14,6 +14,14 @@ ok(module_path('strict') eq $INC{'strict.pm'},
     warn "\n",
          "    \%INC        : $INC{'strict.pm'}\n",
          "    module_path : ", (module_path('strict') || 'undef'), "\n",
+         "    \$^O         : $^O\n";
+};
+
+ok(module_path('Test/More.pm') eq $INC{'Test/More.pm'},
+   "confirm that module_path() works with partial path used as key in \%INC") || do {
+    warn "\n",
+         "    \%INC        : $INC{'Test/More.pm'}\n",
+         "    module_path : ", (module_path('Test/More.pm') || 'undef'), "\n",
          "    \$^O         : $^O\n";
 };
 

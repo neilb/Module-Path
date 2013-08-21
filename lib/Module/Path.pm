@@ -1,7 +1,9 @@
-use strict;
-use warnings;
 package Module::Path;
 # ABSTRACT: get the full path to a locally installed module
+
+use strict;
+use warnings;
+use File::Basename 'dirname';
 
 require Exporter;
 
@@ -26,12 +28,23 @@ sub module_path
     my $relpath;
     my $fullpath;
 
-    ($relpath = $module.'.pm') =~ s/::/$SEPARATOR/g;
+    ($relpath = $module) =~ s/::/$SEPARATOR/g;
+    $relpath .= '.pm' unless $relpath =~ m!\.pm$!;
 
     foreach my $dir (@INC) {
         # see 'perldoc -f require' on why you might find
         # a reference in @INC
         next if ref($dir);
+
+        # If $dir is a symlink, then we resolve it.
+        # Returing a full path containing a symlinked directory can
+        # cause problems: https://github.com/neilbowers/Module-Path/issues/4
+        if (-l $dir) {
+            my $linkdir = readlink($dir);
+            $dir = index($linkdir, $SEPARATOR) == 0
+                   ? $linkdir
+                   : dirname($dir).$SEPARATOR.$linkdir;
+        }
 
         $fullpath = $dir.$SEPARATOR.$relpath;
         return $fullpath if -f $fullpath;
@@ -86,6 +99,11 @@ If the resulting file exists, return this path.
 
 =item
 
+If a directory in C<@INC> is a symlink, then we resolve the path,
+and return a path containing the linked-to directory.
+
+=item
+
 If no file was found, return C<undef>.
 
 =back
@@ -99,6 +117,12 @@ script, which lets you get the path for a module from the command-line:
 
  % mpath Module::Path
 
+The C<module_path()> function will also cope if the module name includes C<.pm>;
+this means you can pass a partial path, such as used as the keys in C<%INC>:
+
+  module_path('Test/More.pm') eq $INC{'Test/More.pm'}
+
+The above is the basis for one of the tests.
 
 =head1 BUGS
 

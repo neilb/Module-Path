@@ -1,5 +1,14 @@
 Revision history for perl module Module::Path
 
+0.10 2013-08-21
+    - If a directory in @INC is a symlink, return the linked-to directory
+      in the path. Problem report and patch from Sharl Morlaroll
+      https://github.com/neilbowers/Module-Path/issues/4
+
+0.09 2013-01-20
+    - You can now pass partial module paths, in the format
+      used as the keys in %INC. Suggested by Steven Haryanto.
+
 0.08 2012-10-18
     - t/03-mpath.t: now used Devel::FindPerl to get path to perl,
       instead of $^X. Thanks to LeonT.
