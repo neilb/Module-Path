@@ -56,4 +56,24 @@ is(
     'got expected output'
 );
 
+chomp ($path = `"$PERL" "$MPATH" --quiet strict warnings No::Such::Module 2>&1`);
+
+ok($? != 0,        'exit status is not zero');
+ok(defined($path), 'path is defined');
+is(
+    $path,
+    "$INC{'strict.pm'}$/$INC{'warnings.pm'}",
+    "error message should not be printed when the option --quiet is specified"
+);
+
+chomp ($path = `"$PERL" "$MPATH" --full strict warnings 2>&1`);
+
+ok($? == 0,        'exit status is zero');
+ok(defined($path), 'path is defined');
+is(
+    $path,
+    "strict $INC{'strict.pm'}$/warnings $INC{'warnings.pm'}",
+    "module name should be printed right before its path if the option --full is specified"
+);
+
 done_testing;
