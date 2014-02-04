@@ -1,6 +1,7 @@
 package Module::Path;
 # ABSTRACT: get the full path to a locally installed module
 
+use 5.006;
 use strict;
 use warnings;
 use File::Basename 'dirname';

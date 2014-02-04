@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+use 5.006;
 use Module::Path qw(module_path);
 use Getopt::Long qw(GetOptions);
 use Pod::Usage qw(pod2usage);
