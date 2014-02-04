@@ -1,5 +1,8 @@
 Revision history for perl module Module::Path
 
+0.10 2014-02-04
+    - mpath can display paths for multiple modules (Ahmad Syaltut)
+
 0.09_01 2013-08-21
     - If a directory in @INC is a symlink, return the linked-to directory
       in the path. Problem report and patch from Sharl Morlaroll
