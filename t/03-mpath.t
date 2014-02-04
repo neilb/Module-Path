@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More 0.88 tests => 2;
+use Test::More 0.88;
 use FindBin 0.05;
 use File::Spec::Functions;
 use Devel::FindPerl qw(find_perl_interpreter);
@@ -39,3 +39,41 @@ ok($? == 0 && defined($path) && $path eq $INC{'strict.pm'},
 chomp($path = `"$PERL" "$MPATH" No::Such::Module 2>&1`);
 ok($? != 0 && defined($path) && $path eq 'No::Such::Module not found',
    "non-existent module should result in failure");
+
+chomp ($path = `"$PERL" "$MPATH" strict warnings 2>&1`);
+
+ok($? == 0, 'exit status is 0');
+ok(defined($path), 'path for both strict.pm and warnings.pm are defined');
+is($path, "$INC{'strict.pm'}$/$INC{'warnings.pm'}", 'and they match %INC');
+
+chomp ($path = `"$PERL" "$MPATH" strict warnings No::Such::Module 2>&1`);
+
+ok($? != 0,        'exit status is not zero');
+ok(defined($path), 'path is defined');
+is(
+    $path,
+    "$INC{'strict.pm'}$/$INC{'warnings.pm'}$/No::Such::Module not found",
+    'got expected output'
+);
+
+chomp ($path = `"$PERL" "$MPATH" --quiet strict warnings No::Such::Module 2>&1`);
+
+ok($? != 0,        'exit status is not zero');
+ok(defined($path), 'path is defined');
+is(
+    $path,
+    "$INC{'strict.pm'}$/$INC{'warnings.pm'}",
+    "error message should not be printed when the option --quiet is specified"
+);
+
+chomp ($path = `"$PERL" "$MPATH" --full strict warnings 2>&1`);
+
+ok($? == 0,        'exit status is zero');
+ok(defined($path), 'path is defined');
+is(
+    $path,
+    "strict $INC{'strict.pm'}$/warnings $INC{'warnings.pm'}",
+    "module name should be printed right before its path if the option --full is specified"
+);
+
+done_testing;
