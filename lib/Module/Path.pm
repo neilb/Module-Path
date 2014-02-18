@@ -35,9 +35,11 @@ sub module_path
 
     DIRECTORY:
     foreach my $dir (@INC) {
+        next DIRECTORY if not defined($dir);
+
         # see 'perldoc -f require' on why you might find
         # a reference in @INC
-        next if ref($dir);
+        next DIRECTORY if ref($dir);
 
         # The directory path might have a symlink somewhere in it,
         # so we get an absolute path (ie resolve any symlinks).

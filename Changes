@@ -1,5 +1,8 @@
 Revision history for Perl module Module::Path
 
+0.11_03 2014-02-18
+    - Another place where we need to worry about getting undef.
+
 0.11_02 2014-02-18
     - Wasn't handling the case where abs_path() returns undef,
       which it does if a symlink "goes nowhere".
