@@ -5,6 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 use File::Basename 'dirname';
+use Cwd qw/ abs_path /;
 
 require Exporter;
 
@@ -37,15 +38,12 @@ sub module_path
         # a reference in @INC
         next if ref($dir);
 
-        # If $dir is a symlink, then we resolve it.
-        # Returing a full path containing a symlinked directory can
-        # cause problems: https://github.com/neilbowers/Module-Path/issues/4
-        if (-l $dir) {
-            my $linkdir = readlink($dir);
-            $dir = index($linkdir, $SEPARATOR) == 0
-                   ? $linkdir
-                   : dirname($dir).$SEPARATOR.$linkdir;
-        }
+        # The directory path might have a symlink somewhere in it,
+        # so we get an absolute path (ie resolve any symlinks).
+        # The previous attempt at this only dealt with the case
+        # where the final directory in the path was a symlink,
+        # now we're trying to deal with symlinks anywhere in the path.
+        $dir = abs_path($dir);
 
         $fullpath = $dir.$SEPARATOR.$relpath;
         return $fullpath if -f $fullpath;
