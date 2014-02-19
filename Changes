@@ -1,5 +1,10 @@
 Revision history for Perl module Module::Path
 
+0.12 2014-02-19
+    - We now fully resolve symlinks in @INC paths. The previous 'fix'
+      for Debian broke the tests on FreeBSD.
+      Thanks to Géraud Continsouzas, and Daniel Lintott for help testing.
+
 0.11_03 2014-02-18
     - Another place where we need to worry about getting undef.
 
