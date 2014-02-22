@@ -12,23 +12,25 @@ my $expected_path;
 
 # This test does "use strict", so %INC should include the path where
 # strict.pm was found, and module_path should find the same
-$expected_path = abs_path($INC{'strict.pm'});
-ok(module_path('strict') eq $expected_path,
+eval { $expected_path = abs_path($INC{'strict.pm'}); };
+ok(!$@ && module_path('strict') eq $expected_path,
    "check 'strict' matches \%INC") || do {
     warn "\n",
          "    \%INC          : $INC{'strict.pm'}\n",
          "    expected path : $expected_path\n",
          "    module_path   : ", (module_path('strict') || 'undef'), "\n",
+         ($@ ? "    \$\@            : $@\n" : ''),
          "    \$^O           : $^O\n";
 };
 
-$expected_path = abs_path($INC{'Test/More.pm'});
-ok(module_path('Test/More.pm') eq $expected_path,
+eval { $expected_path = abs_path($INC{'Test/More.pm'}); };
+ok(!$@ && module_path('Test/More.pm') eq $expected_path,
    "confirm that module_path() works with partial path used as key in \%INC") || do {
     warn "\n",
          "    \%INC          : $INC{'Test/More.pm'}\n",
          "    expected path : $expected_path\n",
          "    module_path   : ", (module_path('Test/More.pm') || 'undef'), "\n",
+         ($@ ? "    \$\@            : $@\n" : ''),
          "    \$^O           : $^O\n";
 };
 

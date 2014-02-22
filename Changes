@@ -1,5 +1,9 @@
 Revision history for Perl module Module::Path
 
+0.13 2014-02-22
+    - Looks like in some rare circumstances, Cwd::abs_path() can croak,
+      so now we wrap that in eval { } and deal accordingly.
+
 0.12 2014-02-19
     - We now fully resolve symlinks in @INC paths. The previous 'fix'
       for Debian broke the tests on FreeBSD.

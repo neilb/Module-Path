@@ -46,8 +46,8 @@ sub module_path
         # The previous attempt at this only dealt with the case
         # where the final directory in the path was a symlink,
         # now we're trying to deal with symlinks anywhere in the path.
-        $dir = abs_path($dir);
-        next DIRECTORY unless defined($dir);
+        eval { $dir = abs_path($dir); };
+        next DIRECTORY if $@ || !defined($dir);
 
         $fullpath = $dir.$SEPARATOR.$relpath;
         return $fullpath if -f $fullpath;
