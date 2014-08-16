@@ -75,8 +75,11 @@ Module::Path - get the full path to a locally installed module
 
 =head1 DESCRIPTION
 
-Module::Path provides a single function, C<module_path()>,
-which will find where a module is installed locally.
+This module provides a single function, C<module_path()>,
+which takes a module name and finds the first directory in your C<@INC> path
+where the module is installed locally.
+It returns the full path to that file, resolving any symlinks.
+It is portable and only depends on core modules.
 
 It works by looking in all the directories in C<@INC>
 for an appropriately named file:

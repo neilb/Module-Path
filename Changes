@@ -4,6 +4,8 @@ Revision history for Perl module Module::Path
     - Added Travis config, using cpanfile and cpanm to ensure all dependencies
       are installed before running tests with prove.
       Thanks to DAGOLDEN.
+    - Improved the first paragraph of DESCRIPTION, so search results give
+      a better summary of the module.
 
 0.13 2014-02-22
     - Looks like in some rare circumstances, Cwd::abs_path() can croak,
