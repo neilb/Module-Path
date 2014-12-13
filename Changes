@@ -1,5 +1,8 @@
 Revision history for Perl module Module::Path
 
+0.15 2014-12-13
+    - Added TODO.md with an initial todo list for the module
+
 0.15 2014-10-14
     - Doing a foreach $dir (@INC) and then resolving symblinks on $dir
       was changing the entries in @INC. HAARG++ for pull request with fix.
