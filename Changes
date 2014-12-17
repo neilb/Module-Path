@@ -1,5 +1,9 @@
 Revision history for Perl module Module::Path
 
+0.18 2014-12-17
+    - RIBASUSHI++ reminded me that to be a usable directory in @INC we need
+      to check -d && -r && -x.
+
 0.17 2014-12-17
     - Fixed RT#96433: ignore directories in @INC which don't exist.
       Apologies to ETHER++ for over-thinking this one,
