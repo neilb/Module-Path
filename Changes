@@ -1,6 +1,11 @@
 Revision history for Perl module Module::Path
 
-0.15 2014-12-13
+0.17 2014-12-17
+    - Fixed RT#96433: ignore directories in @INC which don't exist.
+      Apologies to ETHER++ for over-thinking this one,
+      and taking so long to fix it.
+
+0.16 2014-12-13
     - Added TODO.md with an initial todo list for the module
 
 0.15 2014-10-14
