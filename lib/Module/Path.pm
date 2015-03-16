@@ -41,7 +41,7 @@ sub module_path
         # a reference in @INC
         next DIRECTORY if ref($dir);
 
-        next unless -d $dir && -r $dir && -x $dir;
+        next unless -d $dir && -x $dir;
 
         # The directory path might have a symlink somewhere in it,
         # so we get an absolute path (ie resolve any symlinks).
