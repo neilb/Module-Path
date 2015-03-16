@@ -1,5 +1,11 @@
 Revision history for Perl module Module::Path
 
+0.19 2015-03-16 NEILB
+    - Added [MetaJSON] to dist.ini, so META.json will go into the distribution,
+      as well as META.yml. Thanks to Lucas Kanashiro.
+    - Dropped the -r test on directories, as we only actually need -d and -x.
+      Thanks to Lucas Kanashiro.
+
 0.18 2014-12-17
     - RIBASUSHI++ reminded me that to be a usable directory in @INC we need
       to check -d && -r && -x.
