@@ -84,6 +84,22 @@ where the module is installed locally.
 It returns the full path to that file, resolving any symlinks.
 It is portable and only depends on core modules.
 
+The distribution for C<Module::Path> also includes the C<mpath>
+script, which lets you get the path for a module from the command-line:
+
+ % mpath Module::Path
+
+=head1 EXPORTS
+
+=head2 C<module_path>
+
+  my $value = module_path( $module_name );
+
+This exportable function will return paths to the first such module found in
+your C<@INC>, or return C<undef> if no matching path is found.
+
+=head1 MECHANICS
+
 It works by looking in all the directories in C<@INC>
 for an appropriately named file:
 
@@ -120,11 +136,6 @@ If no file was found, return C<undef>.
 I wrote this module because I couldn't find an alternative
 which dealt with the points listed above, and didn't pull in
 what seemed like too many dependencies to me.
-
-The distribution for C<Module::Path> includes the C<mpath>
-script, which lets you get the path for a module from the command-line:
-
- % mpath Module::Path
 
 The C<module_path()> function will also cope if the module name includes C<.pm>;
 this means you can pass a partial path, such as used as the keys in C<%INC>:
