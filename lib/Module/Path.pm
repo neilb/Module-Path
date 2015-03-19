@@ -27,29 +27,11 @@ BEGIN {
 sub module_path
 {
     my $module = shift;
-    my $fullpath;
     my $relpath = _rel_path($module);
 
-    DIRECTORY:
     foreach my $dir (@INC) {
-        next DIRECTORY if not defined($dir);
-
-        # see 'perldoc -f require' on why you might find
-        # a reference in @INC
-        next DIRECTORY if ref($dir);
-
-        next unless -d $dir && -x $dir;
-
-        # The directory path might have a symlink somewhere in it,
-        # so we get an absolute path (ie resolve any symlinks).
-        # The previous attempt at this only dealt with the case
-        # where the final directory in the path was a symlink,
-        # now we're trying to deal with symlinks anywhere in the path.
-        my $abs_dir = $dir;
-        eval { $abs_dir = abs_path($abs_dir); };
-        next DIRECTORY if $@ || !defined($abs_dir);
-
-        $fullpath = $abs_dir.$SEPARATOR.$relpath;
+        next unless my $abs_dir = _usable_inc($dir);
+        my $fullpath = $abs_dir.$SEPARATOR.$relpath;
         return $fullpath if -f $fullpath;
     }
 
@@ -66,6 +48,30 @@ sub _rel_path {
     return $relpath;
 }
 
+# _usable_inc( $dir )
+# returns $dir into a usable path if possible.
+# if not, returns undef.
+sub _usable_inc {
+    my $dir = shift;
+    return if not defined $dir;
+
+    # see 'perldoc -f require' on why you might find
+    # a reference in @INC
+    return if ref($dir);
+
+    return unless -d $dir && -x $dir;
+
+    # The directory path might have a symlink somewhere in it,
+    # so we get an absolute path (ie resolve any symlinks).
+    # The previous attempt at this only dealt with the case
+    # where the final directory in the path was a symlink,
+    # now we're trying to deal with symlinks anywhere in the path.
+    my $abs_dir = $dir;
+    eval { $abs_dir = abs_path($abs_dir); };
+    return if $@ || !defined($abs_dir);
+
+    return $abs_dir;
+}
 1;
 
 =head1 NAME
