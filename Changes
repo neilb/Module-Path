@@ -1,6 +1,7 @@
 Revision history for Perl module Module::Path
 
 0.20
+    - module_path() now accepts a config hash argument (presently unused)
     - Internals refactory by KENTNL. GH #12
 
 0.19 2015-03-16 NEILB

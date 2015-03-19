@@ -26,7 +26,9 @@ BEGIN {
 
 sub module_path
 {
-    my $module = shift;
+    my $module  = shift;
+    my $opts    = shift;
+    $opts       = {} unless defined $opts;
     my $relpath = _rel_path($module);
 
     foreach my $dir (@INC) {
@@ -107,6 +109,7 @@ script, which lets you get the path for a module from the command-line:
 =head2 C<module_path>
 
   my $value = module_path( $module_name );
+  my $value = module_path( $module_name, \%OPTS ); # Since 0.20
 
 This exportable function will return paths to the first such module found in
 your C<@INC>, or return C<undef> if no matching path is found.
