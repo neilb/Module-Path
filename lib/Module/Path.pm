@@ -27,11 +27,8 @@ BEGIN {
 sub module_path
 {
     my $module = shift;
-    my $relpath;
     my $fullpath;
-
-    ($relpath = $module) =~ s/::/$SEPARATOR/g;
-    $relpath .= '.pm' unless $relpath =~ m!\.pm$!;
+    my $relpath = _rel_path($module);
 
     DIRECTORY:
     foreach my $dir (@INC) {
@@ -57,6 +54,16 @@ sub module_path
     }
 
     return undef;
+}
+# _rel_path( $module )
+# return $module in relative path format.
+sub _rel_path {
+    my $module = shift;
+    my $relpath;
+
+    ($relpath = $module) =~ s/::/$SEPARATOR/g;
+    $relpath .= '.pm' unless $relpath =~ m!\.pm$!;
+    return $relpath;
 }
 
 1;
