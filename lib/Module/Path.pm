@@ -10,7 +10,7 @@ use Cwd qw/ abs_path /;
 require Exporter;
 
 our @ISA       = qw(Exporter);
-our @EXPORT_OK = qw(module_path);
+our @EXPORT_OK = qw(module_path all_module_paths);
 
 my $SEPARATOR;
 
@@ -39,6 +39,24 @@ sub module_path
 
     return undef;
 }
+
+sub all_module_paths
+{
+    my $module  = shift;
+    my $opts    = shift;
+    $opts       = {} unless defined $opts;
+    my $relpath = _rel_path($module);
+
+    my @dirs;
+    foreach my $dir (@INC) {
+        next unless my $abs_dir = _usable_inc($dir);
+        my $fullpath = $abs_dir.$SEPARATOR.$relpath;
+        push @dirs, $fullpath if -f $fullpath;
+    }
+
+    return @dirs;
+}
+
 # _rel_path( $module )
 # return $module in relative path format.
 sub _rel_path {
@@ -93,11 +111,13 @@ Module::Path - get the full path to a locally installed module
 
 =head1 DESCRIPTION
 
-This module provides a single function, C<module_path()>,
-which takes a module name and finds the first directory in your C<@INC> path
-where the module is installed locally.
-It returns the full path to that file, resolving any symlinks.
-It is portable and only depends on core modules.
+This module provides two functions, C<module_path()> and C<all_module_paths()>,
+both of which take a module name and finds respective directories in your
+C<@INC> path to where the module is installed locally.
+
+Both return full paths to matching files, resolving any symlinks.
+
+This module is portable and only depends on core modules.
 
 The distribution for C<Module::Path> also includes the C<mpath>
 script, which lets you get the path for a module from the command-line:
@@ -113,6 +133,21 @@ script, which lets you get the path for a module from the command-line:
 
 This exportable function will return paths to the first such module found in
 your C<@INC>, or return C<undef> if no matching path is found.
+
+=head2 C<all_module_paths>
+
+  my @list = all_module_paths( $module_name );
+  my @list = all_module_paths( $module_name, \%OPTS );
+
+B<Since 0.20>, this exportable function is available on request, which will
+return all matching paths instead of simply the first, or returning an empty
+list if no matching paths are found.
+
+  use Module::Path qw(all_module_paths);
+
+  for my $path (all_module_paths(qw( ExtUtils::MakeMaker ))) {
+    print $path;
+  }
 
 =head1 MECHANICS
 
