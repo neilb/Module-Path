@@ -89,29 +89,29 @@ for an appropriately named file:
 
 =over 4
 
-=item
+=item *
 
 Foo::Bar becomes C<Foo/Bar.pm>, using the correct directory path
 separator for your operating system.
 
-=item
+=item *
 
 Iterate over C<@INC>, ignoring any references
 (see L<perlfunc/"require"> if you're surprised to hear
 that you might find references in C<@INC>).
 
-=item
+=item *
 
 For each directory in C<@INC>, append the partial path (C<Foo/Bar.pm>),
 again using the correct directory path separator.
 If the resulting file exists, return this path.
 
-=item
+=item *
 
 If a directory in C<@INC> is a symlink, then we resolve the path,
 and return a path containing the linked-to directory.
 
-=item
+=item *
 
 If no file was found, return C<undef>.
 
