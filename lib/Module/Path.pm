@@ -168,12 +168,12 @@ L<http://neilb.org/reviews/module-path.html>
 
 =back
 
-core-only runtime dependencies. It you only want to look up the path to
 C<Module::Path> was written to be fast, portable, and have a low number of
+core-only runtime dependencies. If you only want to look up the path to
 a module, it's a good choice.
 
 If you want more information, such as the module's version, what functions
-are provided, etc, then start by looking at L<Module::Info>,
+are provided, etc., then start by looking at L<Module::Info>,
 L<Module::Metadata>, and L<Class::Inspector>.
 
 The following scripts can also give you the path:

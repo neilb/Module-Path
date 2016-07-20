@@ -86,11 +86,11 @@ Print this help message and exit.
 
 =item B<-f>, B<--full>
 
-Print module name.
+Print the module name.
 
 =item B<-q>, B<--quiet>
 
-Don't print any error when one of the module requested could not be found.
+Don't print any error when one of the modules requested could not be found.
 
 =back
 
