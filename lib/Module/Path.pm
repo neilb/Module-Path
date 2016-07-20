@@ -91,7 +91,7 @@ for an appropriately named file:
 
 =item
 
-Foo::Bar becomes C<Foo/Bar.pm>, using the correct directory path
+C<Foo::Bar> becomes C<Foo/Bar.pm>, using the correct directory path
 separator for your operating system.
 
 =item
@@ -168,8 +168,8 @@ L<http://neilb.org/reviews/module-path.html>
 
 =back
 
-Module::Path was written to be fast, portable, and have a low number of
 core-only runtime dependencies. It you only want to look up the path to
+C<Module::Path> was written to be fast, portable, and have a low number of
 a module, it's a good choice.
 
 If you want more information, such as the module's version, what functions
