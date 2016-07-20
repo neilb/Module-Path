@@ -97,7 +97,7 @@ separator for your operating system.
 =item
 
 Iterate over C<@INC>, ignoring any references
-(see L<"perlfunc"/"require"> if you're surprised to hear
+(see L<perlfunc/"require"> if you're surprised to hear
 that you might find references in C<@INC>).
 
 =item
@@ -140,7 +140,7 @@ file. If a file defines multiple packages, this won't work.
 
 This also won't find any modules that are being loaded in some special
 way, for example using a code reference in C<@INC>, as described
-in L<"perlfunc"/"require">.
+in L<perlfunc/"require">.
 
 
 =head1 SEE ALSO
