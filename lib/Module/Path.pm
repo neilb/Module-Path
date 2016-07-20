@@ -191,7 +191,7 @@ Neil Bowers E<lt>neilb@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Neil Bowers <neilb@cpan.org>.
+This software is copyright (c) 2015 by Neil Bowers <neilb@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
