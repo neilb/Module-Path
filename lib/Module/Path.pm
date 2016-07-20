@@ -161,12 +161,7 @@ L<Module::Util>,
 and L<Path::ScanINC>.
 
 I've written a review of all such modules that I'm aware of:
-
-=over 4
-
 L<http://neilb.org/reviews/module-path.html>
-
-=back
 
 Module::Path was written to be fast, portable, and have a low number of
 core-only runtime dependencies. It you only want to look up the path to
