@@ -68,7 +68,7 @@ Module::Path - get the full path to a locally installed module
 =head1 SYNOPSIS
 
  use Module::Path 'module_path';
- 
+
  $path = module_path('Test::More');
  if (defined($path)) {
    print "Test::More found at $path\n";
