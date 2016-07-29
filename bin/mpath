@@ -6,7 +6,7 @@ use Module::Path qw(module_path);
 use Getopt::Long qw(GetOptions);
 use Pod::Usage qw(pod2usage);
 
-GetOptions(\my %opts, 'help|h|?', 'quiet|q', 'full|f')
+GetOptions(\my %opts, 'help|h|?', 'quiet|q', 'full|f', 'dirs|d=s')
   or pod2usage 2;
 
 if ($opts{help}) {
@@ -24,8 +24,14 @@ elsif (!@ARGV) {
 
 my $all_found = 1;
 
+my @search_dirs;
+@search_dirs = split( /,/, $opts{dirs} ) if $opts{dirs};
+
 for my $module (@ARGV) {
-    my $path = module_path($module);
+    my $path =
+      $opts{dirs}
+      ? module_path($module, { dirs => \@search_dirs })
+      : module_path($module);
     if (!defined($path)) {
         $all_found = 0;
         print "$module not found\n" unless $opts{quiet};
@@ -59,6 +65,9 @@ mpath - display the full path to a perl module (installed locally)
   /usr/local/lib/perl5/site_perl/5.16.0/darwin-2level/Moose.pm
   /usr/local/lib/perl5/site_perl/5.16.0/Moo.pm
 
+  % mpath --dirs=/path/to/local/perl/modules Module::Path
+  /home/user/perl/perlbrew/perls/5.16.0/site_perl/5.16.0/Module/Path.pm
+
 =head1 DESCRIPTION
 
 mpath displays the full path to a perl module on the local system.
@@ -91,6 +100,10 @@ Print module name.
 =item B<-q>, B<--quiet>
 
 Don't print any error when one of the module requested could not be found.
+
+=item B<-d>, B<--dirs>
+
+Use the comma separated list of directories to search in instead of C<@INC>.
 
 =back
 
