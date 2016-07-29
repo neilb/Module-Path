@@ -26,15 +26,18 @@ BEGIN {
 
 sub module_path
 {
-    my $module = shift;
+    my ($module, $options) = @_;
     my $relpath;
     my $fullpath;
 
     ($relpath = $module) =~ s/::/$SEPARATOR/g;
     $relpath .= '.pm' unless $relpath =~ m!\.pm$!;
 
+    my @dirs_to_check =
+      $options->{'dirs'} ? @{$options->{'dirs'}} : @INC;
+
     DIRECTORY:
-    foreach my $dir (@INC) {
+    foreach my $dir (@dirs_to_check) {
         next DIRECTORY if not defined($dir);
 
         # see 'perldoc -f require' on why you might find
@@ -76,15 +79,24 @@ Module::Path - get the full path to a locally installed module
    print "Danger Will Robinson!\n";
  }
 
+ # specify a directory to search in, instead of @INC
+ $path = module_path('Test::More', { dirs => ['my/local/path'] });
+ if (defined($path)) {
+   print "Test::More found at $path\n";
+ } else {
+   print "Here be dragons!\n";
+ }
+
 =head1 DESCRIPTION
 
 This module provides a single function, C<module_path()>,
 which takes a module name and finds the first directory in your C<@INC> path
+(or a path specified via the C<dirs> option)
 where the module is installed locally.
 It returns the full path to that file, resolving any symlinks.
 It is portable and only depends on core modules.
 
-It works by looking in all the directories in C<@INC>
+It works by looking in all the directories in the search path (by default C<@INC>)
 for an appropriately named file:
 
 =over 4
@@ -96,19 +108,19 @@ separator for your operating system.
 
 =item
 
-Iterate over C<@INC>, ignoring any references
+Iterate over the search paths, ignoring any references
 (see L<"perlfunc"/"require"> if you're surprised to hear
 that you might find references in C<@INC>).
 
 =item
 
-For each directory in C<@INC>, append the partial path (C<Foo/Bar.pm>),
+For each directory in the search paths, append the partial path (C<Foo/Bar.pm>),
 again using the correct directory path separator.
 If the resulting file exists, return this path.
 
 =item
 
-If a directory in C<@INC> is a symlink, then we resolve the path,
+If a directory in the given search paths is a symlink, then we resolve the path,
 and return a path containing the linked-to directory.
 
 =item
