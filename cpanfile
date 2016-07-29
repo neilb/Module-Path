@@ -9,7 +9,9 @@ requires "warnings" => "0";
 
 on 'test' => sub {
   requires "Devel::FindPerl" => "0";
+  requires "File::Spec" => "0";
   requires "File::Spec::Functions" => "0";
+  requires "File::Temp" => "0";
   requires "FindBin" => "0.05";
   requires "Test::More" => "0.88";
 };

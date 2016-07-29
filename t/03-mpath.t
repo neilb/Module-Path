@@ -8,6 +8,8 @@ use FindBin 0.05;
 use File::Spec::Functions;
 use Devel::FindPerl qw(find_perl_interpreter);
 use Cwd qw/ abs_path /;
+use File::Temp qw{ tempfile tempdir };
+use File::Spec;
 
 my $PERL  = find_perl_interpreter() || die "can't find perl!\n";
 my $MPATH = catfile( $FindBin::Bin, updir(), qw(bin mpath) );
@@ -79,5 +81,31 @@ is(
     "strict ".abs_path($INC{'strict.pm'})."$/warnings ".abs_path($INC{'warnings.pm'}),
     "module name should be printed right before its path if the option --full is specified"
 );
+
+{
+    my $temp_dir = tempdir( CLEANUP => 1 );
+    my ( $fh, $filename ) = tempfile( DIR => $temp_dir, SUFFIX => '.pm' );
+    my $module_name = ( File::Spec->splitpath($filename) )[-1];
+    $module_name =~ s/\.pm$//;
+    my $INC_PATH = catfile( $FindBin::Bin, updir(), 'lib' );
+    my $command =
+      "$PERL -I$INC_PATH $MPATH --dirs='$temp_dir' $module_name 2>&1";
+    chomp( $path = qx{$command} );
+
+    ok( $? == 0,        'exit status is zero' );
+    ok( defined($path), 'path is defined' );
+
+    is( $path, $filename, "--dirs option returns expected path" );
+
+    $command = "$PERL -I$INC_PATH $MPATH "
+      . "--dirs='$temp_dir,\'another/path\'' $module_name 2>&1";
+    chomp( $path = qx{$command} );
+
+    ok( $? == 0,        'exit status is zero' );
+    ok( defined($path), 'path is defined' );
+
+    is( $path, $filename,
+        "--dirs option returns expected path with multiple input dirs" );
+}
 
 done_testing;
