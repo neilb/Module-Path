@@ -1,5 +1,10 @@
 Revision history for Perl module Module::Path
 
+0.20
+    - new function all_module_paths() by KENTNL, with thanks to PERLANCAR, GH #6 and #12
+    - module_path() now accepts a config hash argument (presently unused)
+    - Internals refactory by KENTNL. GH #12
+
 0.19 2015-03-16 NEILB
     - Added [MetaJSON] to dist.ini, so META.json will go into the distribution,
       as well as META.yml. Thanks to Lucas Kanashiro.

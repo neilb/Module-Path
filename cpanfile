@@ -12,6 +12,7 @@ on 'test' => sub {
   requires "File::Spec::Functions" => "0";
   requires "FindBin" => "0.05";
   requires "Test::More" => "0.88";
+  requires "Test::TempDir::Tiny" => "0";
 };
 
 on 'configure' => sub {
