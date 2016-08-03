@@ -61,10 +61,10 @@ mpath - display the full path to a perl module (installed locally)
 
 =head1 DESCRIPTION
 
-mpath displays the full path to a perl module on the local system.
+C<mpath> displays the full path to a perl module on the local system.
 It uses the C<module_path()> function from L<Module::Path> to get the path.
 
-If one of the module wasn't found, mpath will exit with the exit code 1 and
+If one of the modules wasn't found, C<mpath> will exit with the exit code 1 and
 print the following message (you can silence it with the option B<--quiet>):
 
   % mpath Foo::Bar
@@ -86,11 +86,11 @@ Print this help message and exit.
 
 =item B<-f>, B<--full>
 
-Print module name.
+Print the module name.
 
 =item B<-q>, B<--quiet>
 
-Don't print any error when one of the module requested could not be found.
+Don't print any error when one of the modules requested could not be found.
 
 =back
 
