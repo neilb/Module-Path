@@ -56,7 +56,7 @@ sub module_path
         return $fullpath if -f $fullpath;
     }
 
-    return undef;
+    return;
 }
 
 1;
