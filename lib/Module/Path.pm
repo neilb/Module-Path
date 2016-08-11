@@ -89,29 +89,29 @@ for an appropriately named file:
 
 =over 4
 
-=item
+=item *
 
 Foo::Bar becomes C<Foo/Bar.pm>, using the correct directory path
 separator for your operating system.
 
-=item
+=item *
 
 Iterate over C<@INC>, ignoring any references
-(see L<"perlfunc"/"require"> if you're surprised to hear
+(see L<perlfunc/"require"> if you're surprised to hear
 that you might find references in C<@INC>).
 
-=item
+=item *
 
 For each directory in C<@INC>, append the partial path (C<Foo/Bar.pm>),
 again using the correct directory path separator.
 If the resulting file exists, return this path.
 
-=item
+=item *
 
 If a directory in C<@INC> is a symlink, then we resolve the path,
 and return a path containing the linked-to directory.
 
-=item
+=item *
 
 If no file was found, return C<undef>.
 
@@ -140,7 +140,7 @@ file. If a file defines multiple packages, this won't work.
 
 This also won't find any modules that are being loaded in some special
 way, for example using a code reference in C<@INC>, as described
-in L<"perlfunc"/"require">.
+in L<perlfunc/"require">.
 
 
 =head1 SEE ALSO
@@ -161,12 +161,7 @@ L<Module::Util>,
 and L<Path::ScanINC>.
 
 I've written a review of all such modules that I'm aware of:
-
-=over 4
-
 L<http://neilb.org/reviews/module-path.html>
-
-=back
 
 Module::Path was written to be fast, portable, and have a low number of
 core-only runtime dependencies. It you only want to look up the path to
